@@ -10,20 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMediaApp">
         <activity
-            android:name=".feed"
+            android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_feed"
+            android:label="@string/title_activity_home"
             android:theme="@style/Theme.SocialMediaApp.NoActionBar" />
         <activity
             android:name=".StorageActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
