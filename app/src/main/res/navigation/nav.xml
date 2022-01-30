@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/firstFragment">
-
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.socialmediaapp.FirstFragment"
