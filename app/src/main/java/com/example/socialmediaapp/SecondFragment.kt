@@ -77,7 +77,7 @@ class SecondFragment : Fragment() {
 
         firebaseAnalytics = Firebase.analytics
 
-        val user = Firebase.auth.currentUser
+        val user = Firebase.auth.currentUser?.uid
         val storage = Firebase.storage
         val userFolder = user.toString()
         val localfile = File.createTempFile("tempImage", "jpg")
@@ -126,7 +126,7 @@ class SecondFragment : Fragment() {
         var formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         var now = Date()
         var fileName = formatter.format(now) + ".jpg"
-        val user = Firebase.auth.currentUser
+        val user = Firebase.auth.currentUser?.uid
         val userFolder = user.toString()
 
         val storageReference = FirebaseStorage.getInstance().getReference("images/userUploaded/$userFolder/$fileName")
