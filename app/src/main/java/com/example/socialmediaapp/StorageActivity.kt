@@ -48,9 +48,9 @@ class StorageActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        /*val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())*/
-        val now = Date()
-        val fileName = /*formatter.format(now)*/binding.etFileName.text.toString() + ".jpg"
+        var formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
+        var now = Date()
+        var fileName = formatter.format(now) + ".jpg"
 
         val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
 
