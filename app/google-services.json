@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "978914449096",
+    "firebase_url": "https://social-media-app-34102-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "social-media-app-34102",
     "storage_bucket": "social-media-app-34102.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "978914449096-9j83dukojmnptgmtulebeh9e8cllek02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.socialmediaapp",
+            "certificate_hash": "b81b3a93ced42da2cd77314093f232997307d0d4"
+          }
+        },
         {
           "client_id": "978914449096-61e1op4m3sor53a1tb8cdmsk3ldcgnpt.apps.googleusercontent.com",
           "client_type": 3

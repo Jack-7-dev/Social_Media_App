@@ -62,10 +62,10 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/homeImage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"
-                android:src="@drawable/supra_template"
                 android:adjustViewBounds="true"
                 />
 
@@ -87,10 +87,10 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/homeImage2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"
-                android:src="@drawable/reference1"
                 android:adjustViewBounds="true"
                 />
 
