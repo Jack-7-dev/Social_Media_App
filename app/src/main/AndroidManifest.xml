@@ -15,6 +15,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <!-- This sets the Firebase UI as the first activity to be shown to the user on opening,
+                 making sure that they sign in before they can access the app -->
             </intent-filter>
         </activity>
         <activity

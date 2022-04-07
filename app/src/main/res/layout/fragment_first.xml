@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
+    <!--        I cannot comment within specific items, but the general format of items are as follows:
+            id is the id of the item so that it can be called uniquely from within the kotlin files
+            layout width and height is the width and height of the item, wrap content being fit to the size of the item
+            margin is the margin from a particular side of the item: Start being left, End being Right, Top and Bottom
+            text is the hardcoded text shown on the item
+            constraints are how the item is in comparison to the location of other objects around it and the sides of the phone
+
+            The general format of layouts are as follows:
+            Linear layouts have one item after another in a specific orientation, so items can only be adjusted in reference to the items directly surrounding it and the edges
+            Constraint layouts have items anywhere on the screen with constraints to other items and the edges
+ -->
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"

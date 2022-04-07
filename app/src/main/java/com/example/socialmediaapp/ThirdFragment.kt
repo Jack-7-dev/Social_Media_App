@@ -12,22 +12,22 @@ import kotlinx.android.synthetic.main.fragment_third.view.*
 class ThirdFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_third, container, false)
+        inflater.inflate(R.layout.fragment_third, container, false) // Inflated with the xml file
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // Once the view has been created
         super.onViewCreated(view, savedInstanceState)
 
-        signOutButton.setOnClickListener(){
+        signOutButton.setOnClickListener(){ // In fragments, items in the xml don't have to be assigned variables in Kotlin as this is done with the inflation stage, when button pressed
 
-            signOut()
+            signOut() // Run signOut function
 
         }
 
     }
 
     private fun signOut() {
-        val intent = Intent(activity, FirebaseAuth::class.java)
-        startActivity(intent)
+        val intent = Intent(activity, FirebaseAuth::class.java) // Set the intent to go to the firebase auth so that the user can sign out
+        startActivity(intent) // Run the activity
     }
 
 }
