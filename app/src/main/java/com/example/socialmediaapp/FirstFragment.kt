@@ -53,7 +53,8 @@ class FirstFragment : Fragment() {
                     httpsReference = storage.getReferenceFromUrl(split[itemIterator + 3].split(",")[0]) // Get the third item after the current one as the image storage reference
                     pfpReference = storage.getReferenceFromUrl(split[itemIterator + 2].split(",")[0]) // Get the second item after the current one as the profile picture storage reference
                     httpsReference.getFile(localfile1).addOnSuccessListener { // Retrieve the file from the image storage reference and store it in the temporary file "localfile1"
-                        if(BitmapFactory.decodeFile(localfile1.absolutePath)!=null){pictureBitmap = BitmapFactory.decodeFile(localfile1.absolutePath) // Once file retrieved and it isn't empty, decode the binary to an image file
+                        if(BitmapFactory.decodeFile(localfile1.absolutePath)!=null){pictureBitmap = BitmapFactory.decodeFile(localfile1.absolutePath)
+                            // Once file retrieved and it isn't empty, decode the binary to an image file
                         pictureAuthor = split[itemIterator - 4].split(",")[0] // Get the fourth previous item from the database and set it to the image author
                         if (iterator == 1) { // If it is the first picture decoded
                             homeImage1.setImageBitmap(pictureBitmap) // Set it as the first image
