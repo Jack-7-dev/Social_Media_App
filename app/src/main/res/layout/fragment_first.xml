@@ -51,13 +51,15 @@
                 android:layout_marginStart="4dp"
                 android:gravity="center_vertical">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profilepicturetemplate" />
+                    android:id="@+id/pfp1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
                 <TextView
+                    android:id="@+id/author1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="John deez"
                     android:layout_marginStart="16sp"/>
             </LinearLayout>
 
@@ -76,18 +78,101 @@
                 android:layout_marginStart="4dp"
                 android:gravity="center_vertical">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/profilepicturetemplate"/>
+                    android:id="@+id/pfp2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
                 <TextView
+                    android:id="@+id/author2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="John deez"
                     android:layout_marginStart="16sp"/>
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/homeImage2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="4dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/pfp3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/author3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/homeImage3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="4dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/pfp4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/author4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/homeImage4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="4dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/pfp5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"/>
+                <TextView
+                    android:id="@+id/author5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/homeImage5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"

@@ -32,6 +32,8 @@ import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.ktx.storageMetadata
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.android.synthetic.main.fragment_second.view.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,36 +52,63 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = Firebase.auth
-        val user = Firebase.auth.currentUser
-        Username.text = user?.displayName.toString()
+        initialise()
 
-        selectButton.setOnClickListener(){
+        selectButton.setOnClickListener{
 
             selectImage()
 
         }
 
-        uploadButton.setOnClickListener(){
+        uploadButton.setOnClickListener{
 
             uploadImage()
 
         }
 
-        retrieveButton.setOnClickListener(){
+        retrieveButton.setOnClickListener{
 
             retrieveImages()
 
         }
 
+        setPFPButton.setOnClickListener{
+
+            setPFP()
+
+        }
+
     }
+
+    private fun initialise() {
+
+        auth = Firebase.auth
+        val user = Firebase.auth.currentUser
+        val pFPStorageReference = FirebaseStorage.getInstance().getReference("images/userUploaded/${user?.uid.toString()}/pfp.jpg")
+        val localFile = File.createTempFile("tempImage", "jpg")
+        Username.text = user?.displayName.toString()
+        pFPStorageReference.getFile(localFile).addOnSuccessListener {
+            userPFP.setImageBitmap(BitmapFactory.decodeFile(localFile.absolutePath))
+        }
+
+    }
+
+    private fun setPFP(){
+
+        val userFolder = Firebase.auth.currentUser?.uid.toString()
+        val storageReference = FirebaseStorage.getInstance().getReference("images/userUploaded/$userFolder/pfp.jpg")
+        storageReference.putFile(ImageUri).addOnSuccessListener { image1.setImageURI(null) }
+        userPFP.setImageURI(ImageUri)
+
+    }
+
 
     private fun retrieveImages() {
 
         val user = Firebase.auth.currentUser?.uid
         val storage = Firebase.storage
         val userFolder = user.toString()
-        val localfile = File.createTempFile("tempImage", "jpg")
+        val localfile = File.createTempFile("tempImage", ".jpg")
         val storageRef = FirebaseStorage.getInstance().reference.child("images/userUploaded/$userFolder")
         var iterator = 1
         var httpsReference: StorageReference
@@ -92,8 +121,10 @@ class SecondFragment : Fragment() {
                 item.downloadUrl.addOnSuccessListener { it ->
 
                     httpsReference = storage.getReferenceFromUrl("$it")
-                    httpsReference.getFile(localfile).addOnSuccessListener {
-                        bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+                    httpsReference.getFile(localfile).addOnCompleteListener {
+                        Log.d("localfile",localfile.toString())
+                        Log.d("localfile.absolutePath",localfile.absolutePath.toString())
+                        if (BitmapFactory.decodeFile(localfile.absolutePath)!=null){bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
 
                         if (iterator==1){image1.setImageBitmap(bitmap)}
                         if (iterator==2){image2.setImageBitmap(bitmap)}
@@ -102,7 +133,7 @@ class SecondFragment : Fragment() {
                         Log.d("images", "$it")
                         Log.d("iterator", "$iterator")
                         iterator+=1
-                    }
+                    }}
                 }
             }
         }
@@ -110,13 +141,12 @@ class SecondFragment : Fragment() {
 
     private fun uploadImage() {
 
-        val progressDialog = ProgressDialog(activity)
-        progressDialog.setMessage("Uploading file....")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-
         @IgnoreExtraProperties
-        data class Image(val author: String? = null, val url: String? = null)
+        data class Image(
+            val author: String? = null,
+            val url: String? = null,
+            val pfp: String? = null
+        )
 
         database = Firebase.database.reference
         val databaseReference = database.child("images")
@@ -126,23 +156,31 @@ class SecondFragment : Fragment() {
         val user = Firebase.auth.currentUser?.uid
         val userName = Firebase.auth.currentUser?.displayName
         val userFolder = user.toString()
+        val pfp =
+            FirebaseStorage.getInstance().getReference("images/userUploaded/$userFolder/pfp.jpg")
 
-        val storageReference = FirebaseStorage.getInstance().getReference("images/userUploaded/$userFolder/$fileName")
+        val storageReference =
+            FirebaseStorage.getInstance().getReference("images/userUploaded/$userFolder/$fileName")
 
-        storageReference.putFile(ImageUri).addOnSuccessListener {
+        if(try {
+                storageReference.putFile(ImageUri)
+            } catch (e: UninitializedPropertyAccessException) {
+                null
+            }!=null){storageReference.putFile(ImageUri).addOnSuccessListener {
             image1.setImageURI(null)
-            if (progressDialog.isShowing) progressDialog.dismiss()
-            storageReference.downloadUrl.addOnSuccessListener { res->
-                var imageStructure = Image(userName, res.toString())
-                databaseReference.child(fileFormat).setValue(imageStructure)
+            pfp.downloadUrl.addOnSuccessListener { res ->
+                var pfpUrl = res.toString().split("=".toRegex())[0]
+                storageReference.downloadUrl.addOnSuccessListener { res ->
+                    var imageStructure = Image(userName, res.toString(), pfpUrl)
+                    databaseReference.child(fileFormat).setValue(imageStructure)
+                }
             }
-        }.addOnFailureListener{
-            Toast.makeText(activity,"It broke sadge", Toast.LENGTH_LONG).show()
-            if (progressDialog.isShowing) progressDialog.dismiss()
+        }}
+        else{
+            Toast.makeText(activity,"Make sure to add an image before pressing upload!",Toast.LENGTH_LONG).show()
         }
-
-
     }
+
 
 
     private fun selectImage() {
